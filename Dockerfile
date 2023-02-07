@@ -44,10 +44,10 @@ RUN cd /home/work/vsomeip/examples &&\
 RUN git clone https://github.com/satyamss7/modified_notify_and_subscribe_GPIO.git
 RUN cp -fr /home/work/modified_notify_and_subscribe_GPIO/* /home/work/vsomeip/examples/
 RUN cd /home/work/vsomeip/build/ &&\
-	cmake .. ;\
-	make ;\
-	make install ;\
-	cmake --build . --target examples ;\
+	sudo cmake .. ;\
+	sudo make ;\
+	sudo make install ;\
+	sudo cmake --build . --target examples ;\
 	ldconfig
 
 COPY ./start.sh /start.sh
