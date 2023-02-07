@@ -1,0 +1,63 @@
+version :  '3.7'
+services : 
+  NodeA : 
+     build : 
+      context : .
+      dockerfile : Dockerfile
+     image : custom_node
+     restart : always
+     container_name : vsomeip_node_a
+     
+     networks : 
+      node_AB_net : 
+        ipv4_address : 192.168.1.2
+      node_out_net : 
+        ipv4_address : 192.168.29.123
+     privileged : true
+     devices:
+        - /dev/gpiochip0:/dev/gpiochip0
+        - /dev/gpiomem:/dev/gpiomem
+     volumes:
+          - /sys/class/gpio:/sys/class/gpio
+          - /sys/class/gpio/export:/sys/class/gpio/export
+
+  NodeB : 
+     build : 
+      context : .
+      dockerfile : Dockerfile
+     image : custom_node
+     restart : always
+     container_name : vsomeip_node_b
+     networks : 
+      node_AB_net : 
+        ipv4_address : 192.168.1.3
+      node_BC_net : 
+        ipv4_address : 192.168.2.3
+
+  NodeC : 
+     build : 
+      context : .
+      dockerfile : Dockerfile
+     image : custom_node
+     restart : always
+     container_name : vsomeip_node_c
+     networks : 
+      node_BC_net : 
+        ipv4_address : 192.168.2.2
+
+networks : 
+   node_AB_net : 
+     name : vsomeip_node_AB_net
+     ipam : 
+      config : 
+        - subnet : 192.168.1.0/24
+   node_BC_net : 
+     name : vsomeip_node_BC_net
+     ipam : 
+      config : 
+        - subnet : 192.168.2.0/24
+   node_out_net :
+     name : vsomeip_node_out_net
+     ipam : 
+      config : 
+        - subnet : 192.168.29.0/24
