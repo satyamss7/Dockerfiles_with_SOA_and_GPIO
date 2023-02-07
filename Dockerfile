@@ -41,8 +41,8 @@ RUN cd /home/work/vsomeip/examples &&\
 	cmake .. ;\
 	make ;\
 	make install
-RUN git clone https://github.com/satyamss7/SOA_CODE_FOR_DOCKER.git
-RUN cp -fr /home/work/SOA_CODE_FOR_DOCKER/* /home/work/vsomeip/examples/
+RUN git clone https://github.com/satyamss7/modified_notify_and_subscribe_GPIO.git
+RUN cp -fr /home/work/modified_notify_and_subscribe_GPIO/* /home/work/vsomeip/examples/
 RUN cd /home/work/vsomeip/build/ &&\
 	cmake .. ;\
 	make ;\
